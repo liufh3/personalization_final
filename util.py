@@ -1,10 +1,7 @@
 import pandas as pd
-import numpy as np
 import json
 from tqdm import tqdm_notebook
 import collections
-import time
-import bisect
 
 def load_json(file_name, save = True):
     lines = open("yelp_dataset/"+str(file_name)+".json").readlines()
