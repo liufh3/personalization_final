@@ -29,3 +29,15 @@ def get_sum_count(train_df):
         for i in range(4):
             sum_dict[user][i + 1] += sum_dict[user][i]
     return sum_dict
+
+
+def clean_cate(x):
+    if type(x) == str:
+        res = []
+        terms = x.split(',')
+        for t in terms:
+            res.append(t.strip().replace(' ', '_'))
+        # print(res)
+        return ' '.join(res)
+    else:
+        return ''
