@@ -1,0 +1,1664 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Final Report}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{final-project-for-personalization}{%
+\section{Final Project for
+Personalization}\label{final-project-for-personalization}}
+
+    \hypertarget{importing-libs}{%
+\subsection{0. Importing libs}\label{importing-libs}}
+
+we are using several common libs includes: - pandas - numpy - sklearn -
+scipy
+
+to deal with general data structure and also fastFM for fastorization
+machine.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}280}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          
+          \PY{k+kn}{import} \PY{n+nn}{pickle}
+          \PY{k+kn}{import} \PY{n+nn}{sys}
+          \PY{k+kn}{import} \PY{n+nn}{json}
+          \PY{k+kn}{import} \PY{n+nn}{collections}
+          \PY{k+kn}{import} \PY{n+nn}{os}
+          \PY{k+kn}{import} \PY{n+nn}{time}
+          \PY{k+kn}{import} \PY{n+nn}{bisect}
+          
+          
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}extraction} \PY{k}{import} \PY{n}{DictVectorizer}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}extraction}\PY{n+nn}{.}\PY{n+nn}{text} \PY{k}{import} \PY{n}{TfidfVectorizer}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+          
+          \PY{k+kn}{import} \PY{n+nn}{scipy}
+          \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{sparse} \PY{k}{import} \PY{n}{csr\PYZus{}matrix}\PY{p}{,} \PY{n}{hstack}\PY{p}{,} \PY{n}{vstack}
+          
+          \PY{k+kn}{from} \PY{n+nn}{util} \PY{k}{import} \PY{n}{load\PYZus{}json}\PY{p}{,} \PY{n}{get\PYZus{}sum\PYZus{}count}
+          \PY{k+kn}{from} \PY{n+nn}{tqdm} \PY{k}{import} \PY{n}{tqdm\PYZus{}notebook}
+          \PY{k+kn}{from} \PY{n+nn}{fastFM} \PY{k}{import} \PY{n}{als}
+          
+          \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{ml}\PY{n+nn}{.}\PY{n+nn}{evaluation} \PY{k}{import} \PY{n}{RegressionEvaluator}
+          \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{ml}\PY{n+nn}{.}\PY{n+nn}{recommendation} \PY{k}{import} \PY{n}{ALS}
+          \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql} \PY{k}{import} \PY{n}{Row}
+          \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{types} \PY{k}{import} \PY{n}{IntegerType}
+          \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{ml}\PY{n+nn}{.}\PY{n+nn}{tuning} \PY{k}{import} \PY{n}{ParamGridBuilder}\PY{p}{,} \PY{n}{CrossValidator}
+          \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{context} \PY{k}{import} \PY{n}{SparkContext}
+          \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{session} \PY{k}{import} \PY{n}{SparkSession}
+\end{Verbatim}
+
+
+    \hypertarget{data-preprocessing}{%
+\subsection{1. Data Preprocessing}\label{data-preprocessing}}
+
+In this section we first decompress all the json file with self
+implemented function imported from util.py and then we filter out
+unactive user and split the dataset into train and test data. Also we
+generate several auxiliry dataframe for group statistics for further
+usage.
+
+    \hypertarget{json-data-decompress}{%
+\subsubsection{1.1 Json Data Decompress}\label{json-data-decompress}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{for} \PY{n}{file\PYZus{}name} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{checkin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tip}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{photo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+            \PY{n}{load\PYZus{}json}\PY{p}{(}\PY{n}{file\PYZus{}name}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{review\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./yelp\PYZus{}dataset/review.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{review\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}               business\_id  cool                 date  funny  \textbackslash{}
+        0  ujmEBvifdJM6h6RLv4wQIg     0  2013-05-07 04:34:36    1.0   
+        1  NZnhc2sEQy3RmzKTZnqtwQ     0  2017-01-14 21:30:33    0.0   
+        2  WTqjgwHlXbSFevF32\_DJVw     0  2016-11-09 20:09:03    0.0   
+        
+                        review\_id  stars  \textbackslash{}
+        0  Q1sbwvVQXV2734tPgoKj4Q    1.0   
+        1  GJXCdrto3ASJOqKeVWPi6Q    5.0   
+        2  2TzJjDVDEuAW6MR5Vuc1ug    5.0   
+        
+                                                        text  useful  \textbackslash{}
+        0  Total bill for this horrible service? Over \$8G{\ldots}     6.0   
+        1  I *adore* Travis at the Hard Rock's new Kelly {\ldots}     0.0   
+        2  I have to say that this office really has it t{\ldots}     3.0   
+        
+                          user\_id  
+        0  hG7b0MtEbXx5QzbzE6C\_VA  
+        1  yXQM5uF2jS6es16SJzNHfg  
+        2  n6-Gk65cPZL6Uz8qRm3NYw  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{business\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./yelp\PYZus{}dataset/business.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{business\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}                        address  \textbackslash{}
+        0  2818 E Camino Acequia Drive   
+        1         30 Eglinton Avenue W   
+        2    10110 Johnston Rd, Ste 15   
+        
+                                                  attributes             business\_id  \textbackslash{}
+        0                           \{'GoodForKids': 'False'\}  1SWheh84yJXfytovILXOAQ   
+        1  \{'RestaurantsReservations': 'True', 'GoodForMe{\ldots}  QXAEGFB4oINsVuTFxEYKFQ   
+        2  \{'GoodForKids': 'True', 'NoiseLevel': "u'avera{\ldots}  gnKjwL\_1w79qoiV3IC\_xQQ   
+        
+                                                  categories         city  \textbackslash{}
+        0                                  Golf, Active Life      Phoenix   
+        1  Specialty Food, Restaurants, Dim Sum, Imported{\ldots}  Mississauga   
+        2                  Sushi Bars, Restaurants, Japanese    Charlotte   
+        
+                                                       hours  is\_open   latitude  \textbackslash{}
+        0                                                NaN        0  33.522143   
+        1  \{'Monday': '9:0-0:0', 'Tuesday': '9:0-0:0', 'W{\ldots}        1  43.605499   
+        2  \{'Monday': '17:30-21:30', 'Wednesday': '17:30-{\ldots}        1  35.092564   
+        
+            longitude                         name postal\_code  review\_count  stars  \textbackslash{}
+        0 -112.018481   Arizona Biltmore Golf Club       85016             5    3.0   
+        1  -79.652289   Emerald Chinese Restaurant     L5R 3E7           128    2.5   
+        2  -80.859132  Musashi Japanese Restaurant       28210           170    4.0   
+        
+          state  
+        0    AZ  
+        1    ON  
+        2    NC  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{user\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./yelp\PYZus{}dataset/user.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{user\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/IPython/core/interactiveshell.py:2785: DtypeWarning: Columns (13) have mixed types. Specify dtype option on import or set low\_memory=False.
+  interactivity=interactivity, compiler=compiler, result=result)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}    average\_stars  compliment\_cool  compliment\_cute  compliment\_funny  \textbackslash{}
+        0           4.03                1                0                 1   
+        1           3.63                1                0                 1   
+        2           3.71                0                0                 0   
+        
+           compliment\_hot  compliment\_list  compliment\_more  compliment\_note  \textbackslash{}
+        0               2                0                0                1   
+        1               1                0                0                0   
+        2               0                0                0                1   
+        
+           compliment\_photos  compliment\_plain         {\ldots}           cool  \textbackslash{}
+        0                  0                 1         {\ldots}             25   
+        1                  0                 0         {\ldots}             16   
+        2                  0                 0         {\ldots}             10   
+        
+                    elite  fans                                            friends  \textbackslash{}
+        0  2015,2016,2017     5  c78V-rj8NQcQjOI8KP3UEA, alRMgPcngYSCJ5naFRBz5g{\ldots}   
+        1             NaN     4  kEBTgDvFX754S68FllfCaA, aB2DynOxNOJK9st2ZeGTPg{\ldots}   
+        2             NaN     0  4N-HU\_T32hLENLntsNKNBg, pSY2vwWLgWfGVAAiKQzMng{\ldots}   
+        
+           funny    name  review\_count useful                 user\_id  \textbackslash{}
+        0     17  Rashmi            95     84  l6BmjZMeQD3rDxWUbiAiow   
+        1     22   Jenna            33     48  4XChL029mKr5hydo79Ljxg   
+        2      8   David            16     28  bc8C\_eETBWL0olvFSJJd0w   
+        
+                 yelping\_since  
+        0  2013-10-08 23:11:33  
+        1  2013-02-21 22:29:06  
+        2  2013-10-04 00:16:10  
+        
+        [3 rows x 22 columns]
+\end{Verbatim}
+            
+    \hypertarget{unactive-user-filter-out-traintest-split}{%
+\subsubsection{1.2 Unactive User Filter Out \& Train/Test
+Split}\label{unactive-user-filter-out-traintest-split}}
+
+    \hypertarget{unactive-filter}{%
+\paragraph{1.2.1 Unactive Filter}\label{unactive-filter}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{user\PYZus{}count} \PY{o}{=} \PY{n}{review\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+         \PY{n}{user\PYZus{}count} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{user\PYZus{}count}\PY{p}{)}
+         \PY{n}{user\PYZus{}count} \PY{o}{=} \PY{n}{user\PYZus{}count}\PY{p}{[}\PY{n}{user\PYZus{}count}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{5}\PY{p}{]}
+         \PY{n}{user\PYZus{}count} \PY{o}{=} \PY{n}{user\PYZus{}count}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{user\PYZus{}count}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{active\PYZus{}review\PYZus{}df} \PY{o}{=} \PY{n}{review\PYZus{}df}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{user\PYZus{}count}\PY{p}{,}\PY{n}{on} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{how} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{user\PYZus{}count}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{1.0}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{review\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f user are active user}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{active\PYZus{}review\PYZus{}df}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{1.0}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{review\PYZus{}df}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f reviews are rated by active user}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+17.47745150378282\% of user are active user
+67.87820102657801\% of reviews are rated by active user
+
+    \end{Verbatim}
+
+    As for here, we can see that only 17\% users are active user and 17\%
+user generated 67\% reviews, which indicates a long-tail effect within
+the dataset.
+
+    \hypertarget{traintest-split}{%
+\paragraph{Train/Test Split}\label{traintest-split}}
+
+To split the last comment and rating of each active user, we need to
+sort all user by the review time within each user group. Here we user
+dataframe groupby and apply function to extremely shorten the time
+consumption
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{sorted\PYZus{}group} \PY{o}{=} \PY{n}{active\PYZus{}review\PYZus{}df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         
+         \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+         \PY{n}{train\PYZus{}df} \PY{o}{=} \PY{n}{sorted\PYZus{}group}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{finished in }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ sec.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         
+         \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+         \PY{n}{test\PYZus{}df} \PY{o}{=} \PY{n}{sorted\PYZus{}group}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{finished in }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ sec.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+finished in 377.8252320289612 sec.
+finished in 343.2567129135132 sec.
+
+    \end{Verbatim}
+
+    And we save train and test data for further usage
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{train\PYZus{}df} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}df} \PY{o}{=} \PY{n}{test\PYZus{}df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{test\PYZus{}df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{train\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{index\PYZus{}col} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{test\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./test.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{index\PYZus{}col} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/numpy/lib/arraysetops.py:472: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  mask |= (ar1 == a)
+
+    \end{Verbatim}
+
+    \hypertarget{calculate-sum-dict}{%
+\subsubsection{1.3 Calculate Sum Dict}\label{calculate-sum-dict}}
+
+sum\_dict is a dictionary that contain the rating information for each
+user for each user\_id as a key, the value is another dictionary contain
+the count of how many ratings scores are under (included) 2,3,4,5 and 6
+reletively. This is used for calculating the rank accuracy for each test
+data point. For instance, when we have a test sample with score of 4 and
+we predict it as 3, and suppose the user is user A Then the rank of the
+original score is the sum of the scores rated by A under 4, and the rank
+of the predicted score is the sum of the scores rated by A under 3. Then
+we calculated the rank correlation to get the overall rank accuracy. See
+example below for the sum\_dict
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{sum\PYZus{}dict} \PY{o}{=} \PY{n}{get\PYZus{}sum\PYZus{}count}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=286130), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{sum\PYZus{}dict}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}1lKK3aKOuomHnwAkAow}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} [17, 22, 32, 55, 127]
+\end{Verbatim}
+            
+    As we can see above, for user ``---1lKK3aKOuomHnwAkAow'', he or she has
+17 score 1, 5 score 2, 10 score 3, 23 score 4 and 72 score 5. So that
+within all his or her ratings, there are 17 reviews have a score under 2
+and 22 reviews have a score under 3 and so on. Thus, when we have a new
+predicted score come in, we can quickly give the rank of that prediction
+by reading the corresponding summation of the count of the reviews with
+specific score. And then accelerate the calculating of rank accuracy
+
+    \hypertarget{data-visualization}{%
+\subsection{2. Data Visualization}\label{data-visualization}}
+
+In this section, we explore the dataset and generate several figure
+about the data trying to show sme insight of the dataset.
+
+    \hypertarget{active-users}{%
+\subsubsection{2.1 Active Users}\label{active-users}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{active\PYZus{}user\PYZus{}df} \PY{o}{=} \PY{n}{user\PYZus{}df}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{user\PYZus{}count}\PY{p}{,}\PY{n}{on} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{how} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{active\PYZus{}user\PYZus{}df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{useful}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:}        average\_stars   review\_count         useful
+         count  286130.000000  286130.000000  286130.000000
+         mean        3.748822      60.538759     137.842348
+         std         0.706024     156.690863    1058.085528
+         min         1.000000       1.000000       0.000000
+         25\%         3.380000       9.000000       5.000000
+         50\%         3.830000      16.000000      14.000000
+         75\%         4.220000      43.000000      45.000000
+         max         5.000000   13278.000000  154202.000000
+\end{Verbatim}
+            
+    As we can see here, the statistics of average stars, review count and
+useful are shown as above. In fact people tends to rating 3.74 which is
+higher than 3.0 as the average overall ratings. And in general for each
+user they may contribute 22 reviews and there are even a user contribute
+13278 reviews(that's incredible actual, saying the user had been an
+active user for 10 years and contribute review everyday within last 10
+years, he or she still need to contribute aroun 3 to 4 reviews per day).
+And useful is another important statistic, for us to evaluate the
+importance of an user of a review. Most people have a 0 useful and a few
+have a high useful, it's like a social media.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{active\PYZus{}user\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Average stars seems like a right skewed normal distribution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{active\PYZus{}user\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{n}{b}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    To show this clearly, we change the scale for y axis as log-scale.
+Obviously, there is a long tail effect in this data
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{active\PYZus{}user\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{useful}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    similar to the review count, useful is long-tailed
+
+    \hypertarget{business}{%
+\subsection{2.2 Business}\label{business}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{business\PYZus{}df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}50}]:}              is\_open       latitude      longitude   review\_count  \textbackslash{}
+         count  192609.000000  192609.000000  192609.000000  192609.000000   
+         mean        0.823040      38.541803     -97.594785      33.538962   
+         std         0.381635       4.941964      16.697725     110.135224   
+         min         0.000000      33.204642    -115.493471       3.000000   
+         25\%         1.000000      33.637408    -112.274677       4.000000   
+         50\%         1.000000      36.144815    -111.759324       9.000000   
+         75\%         1.000000      43.602989     -79.983614      25.000000   
+         max         1.000000      51.299943     -72.911982    8348.000000   
+         
+                        stars  
+         count  192609.000000  
+         mean        3.585627  
+         std         1.018458  
+         min         1.000000  
+         25\%         3.000000  
+         50\%         3.500000  
+         75\%         4.500000  
+         max         5.000000  
+\end{Verbatim}
+            
+    There are 82\% business are still open, however, including the closed
+business may help us build better recommend system.
+
+    \hypertarget{review}{%
+\subsection{2.3 Review}\label{review}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:}                cool         funny         stars        useful         count
+         count  4.252140e+06  4.252140e+06  4.252140e+06  4.252140e+06  4.252140e+06
+         mean   7.766306e-01  6.230369e-01  3.748399e+00  1.626710e+00  8.740699e+01
+         std    2.803070e+00  2.597718e+00  1.351254e+00  3.960639e+00  2.116509e+02
+         min   -1.000000e+00  0.000000e+00  1.000000e+00 -1.000000e+00  5.000000e+00
+         25\%    0.000000e+00  0.000000e+00  3.000000e+00  0.000000e+00  1.100000e+01
+         50\%    0.000000e+00  0.000000e+00  4.000000e+00  1.000000e+00  2.600000e+01
+         75\%    1.000000e+00  0.000000e+00  5.000000e+00  2.000000e+00  7.900000e+01
+         max    2.900000e+02  9.700000e+02  5.000000e+00  1.241000e+03  4.129000e+03
+\end{Verbatim}
+            
+    Similar to the useful in active users, reviews have cool and funny
+attribute, but also seems long tail.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Not same as average stars for each user, the stars distribution of
+reviews are not normal distribution, bu a more complicated one. People
+tends to rate more extreme score than average case. We can see rather
+than rate a 2, people tends to directly give a 1 instead or a 3.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{useful}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{funny}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Seems clicking cool attribute action is less concentrate rather than
+useful or funny.
+
+    \hypertarget{baseline}{%
+\subsection{3. Baseline}\label{baseline}}
+
+    In this section, we will first discuss about the metrics we used to
+evaluate or recommend system and then talk about several baseline from
+random guess to a simple collaborative filtering and use the above
+metrics to have a sense of the difficulty of the problem.
+
+    \hypertarget{metrics}{%
+\subsubsection{3.1 Metrics}\label{metrics}}
+
+For the problem, we set up 3 method to evaluate our result. Mean
+Absolute Error, Mean Square Error, and Rank Accuracy. MAE and MSE are
+easy to understand and easy to implement. These two method evaluate the
+general error, from different perspective, MAE is the most geenral one
+and MSE punish more on larger difference. Rank Accuracy, as we discussed
+a bit in section 1.3, we calculate the correlation score of the rank of
+true score for each test sample and the rank of predicted score for each
+test sample. As absolute score may not mean the same for different user,
+however, rank may be more meaningful.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{k}{def} \PY{n+nf}{mae}\PY{p}{(}\PY{n}{true}\PY{p}{,} \PY{n}{pred}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    true: as a vector}
+         \PY{l+s+sd}{    pred: as a vector}
+         \PY{l+s+sd}{    calculating mean absolute error}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{true}\PY{p}{)} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pred}\PY{p}{)}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{true} \PY{o}{\PYZhy{}} \PY{n}{pred}\PY{p}{)}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{mse}\PY{p}{(}\PY{n}{true}\PY{p}{,} \PY{n}{pred}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    true as a vector}
+         \PY{l+s+sd}{    pred as a vector}
+         \PY{l+s+sd}{    calculating mean square error}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{true}\PY{p}{)} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pred}\PY{p}{)}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{true} \PY{o}{\PYZhy{}} \PY{n}{pred}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{true} \PY{o}{\PYZhy{}} \PY{n}{pred}\PY{p}{)}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}rank}\PY{p}{(}\PY{n}{sum\PYZus{}dict}\PY{p}{,} \PY{n}{arraylike}\PY{p}{)}\PY{p}{:}
+             \PY{n}{score} \PY{o}{=} \PY{n}{arraylike}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{user} \PY{o}{=} \PY{n}{arraylike}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{k}{return} \PY{n}{sum\PYZus{}dict}\PY{p}{[}\PY{n}{user}\PY{p}{]}\PY{p}{[}\PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{n}{score} \PY{o}{+} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{]}
+         
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}rank\PYZus{}pred}\PY{p}{(}\PY{n}{sum\PYZus{}dict}\PY{p}{,} \PY{n}{arraylike}\PY{p}{)}\PY{p}{:}
+             \PY{n}{score} \PY{o}{=} \PY{n}{arraylike}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{user} \PY{o}{=} \PY{n}{arraylike}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{k}{return} \PY{n}{sum\PYZus{}dict}\PY{p}{[}\PY{n}{user}\PY{p}{]}\PY{p}{[}\PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{n}{score} \PY{o}{+} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{]}
+         
+         
+         \PY{k}{def} \PY{n+nf}{rank\PYZus{}accuracy}\PY{p}{(}\PY{n}{sum\PYZus{}dict}\PY{p}{,} \PY{n}{prediction}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    input prediction dataframe and make user\PYZus{}id as index}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{n}{rank\PYZus{}true} \PY{o}{=} \PY{n}{prediction}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{get\PYZus{}rank}\PY{p}{(}\PY{n}{sum\PYZus{}dict}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{rank\PYZus{}pred} \PY{o}{=} \PY{n}{prediction}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{get\PYZus{}rank\PYZus{}pred}\PY{p}{(}\PY{n}{sum\PYZus{}dict}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{rank\PYZus{}true}\PY{p}{,} \PY{n}{rank\PYZus{}pred}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}metrics}\PY{p}{(}\PY{n}{sum\PYZus{}dict}\PY{p}{,}\PY{n}{pred\PYZus{}df}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{p}{(}\PY{n}{mae}\PY{p}{(}\PY{n}{pred\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{pred\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{mse}\PY{p}{(}\PY{n}{pred\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{pred\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{rank\PYZus{}accuracy}\PY{p}{(}\PY{n}{sum\PYZus{}dict}\PY{p}{,}\PY{n}{pred\PYZus{}df}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    Code is shown above and also could be found in metrics.py
+
+    \hypertarget{random-guess}{%
+\subsubsection{3.2 Random Guess}\label{random-guess}}
+
+We first apply a random guess regressor to have a sense of lower bound
+of the problem.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}290}]:} \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}\PY{n}{size} \PY{o}{=} \PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}df}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{pred\PYZus{}df} \PY{o}{=} \PY{n}{test\PYZus{}df}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{pred\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{y\PYZus{}pred}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}291}]:} \PY{n}{mae\PYZus{}score}\PY{p}{,}\PY{n}{mse\PYZus{}score}\PY{p}{,}\PY{n}{rank\PYZus{}accuracy\PYZus{}score} \PY{o}{=} \PY{n}{get\PYZus{}metrics}\PY{p}{(}\PY{n}{sum\PYZus{}dict}\PY{p}{,}\PY{n}{pred\PYZus{}df}\PY{p}{)}
+          \PY{n}{result} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mae\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mse\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rank\PYZus{}accuracy\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{result}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random\PYZus{}guess}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{mae\PYZus{}score}\PY{p}{,}\PY{n}{mse\PYZus{}score}\PY{p}{,}\PY{n}{rank\PYZus{}accuracy\PYZus{}score}\PY{p}{]}
+          \PY{n}{result}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}291}]:}               mae\_score  mse\_score  rank\_accuracy\_score
+          random\_guess   1.780044   4.904673             0.650275
+\end{Verbatim}
+            
+    \hypertarget{baseline---matrix-factorization}{%
+\subsubsection{3.3 Baseline - Matrix
+Factorization}\label{baseline---matrix-factorization}}
+
+We then tried to trian a matrix factorization model as our baseline
+model only using user\_id, business\_id and stars.
+
+Since we will use ALS in spark, which requires user\_id and business\_id
+to be numerical, we first transform user\_id and business\_id to
+user\_index and business\_index
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}281}]:} \PY{n}{train} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{test} \PY{o}{=} \PY{n}{test\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}282}]:} \PY{n}{n} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{m} \PY{o}{=} \PY{n}{test\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{train\PYZus{}user\PYZus{}id} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+          \PY{n}{train\PYZus{}business\PYZus{}id} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+          \PY{n}{user\PYZus{}id\PYZus{}index} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+          \PY{n}{business\PYZus{}id\PYZus{}index} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}user\PYZus{}id}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n}{user\PYZus{}id\PYZus{}index}\PY{p}{[}\PY{n}{train\PYZus{}user\PYZus{}id}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{i}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}business\PYZus{}id}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n}{business\PYZus{}id\PYZus{}index}\PY{p}{[}\PY{n}{train\PYZus{}business\PYZus{}id}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{i}
+              
+          \PY{n}{nu} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{user\PYZus{}id\PYZus{}index}\PY{p}{)}
+          \PY{n}{nb} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{business\PYZus{}id\PYZus{}index}\PY{p}{)}
+          \PY{n}{test\PYZus{}user\PYZus{}id} \PY{o}{=} \PY{n}{test\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+          \PY{n}{test\PYZus{}business\PYZus{}id} \PY{o}{=} \PY{n}{test\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}user\PYZus{}id}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{test\PYZus{}user\PYZus{}id}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{user\PYZus{}id\PYZus{}index}\PY{p}{:}
+                  \PY{n}{user\PYZus{}id\PYZus{}index}\PY{p}{[}\PY{n}{test\PYZus{}user\PYZus{}id}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{nu}
+                  \PY{n}{nu} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}business\PYZus{}id}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{test\PYZus{}business\PYZus{}id}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{business\PYZus{}id\PYZus{}index}\PY{p}{:}
+                  \PY{n}{business\PYZus{}id\PYZus{}index}\PY{p}{[}\PY{n}{test\PYZus{}business\PYZus{}id}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{nb}
+                  \PY{n}{nb} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}283}]:} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{user\PYZus{}id}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{user\PYZus{}id\PYZus{}index}\PY{p}{)}
+          \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{business\PYZus{}id}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{business\PYZus{}id\PYZus{}index}\PY{p}{)}
+          \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{user\PYZus{}id}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{user\PYZus{}id\PYZus{}index}\PY{p}{)}
+          \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{business\PYZus{}id}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{business\PYZus{}id\PYZus{}index}\PY{p}{)}
+          
+          \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{test} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/ipykernel\_launcher.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row\_indexer,col\_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  """Entry point for launching an IPython kernel.
+/usr/local/lib/python3.6/site-packages/ipykernel\_launcher.py:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row\_indexer,col\_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  
+/usr/local/lib/python3.6/site-packages/ipykernel\_launcher.py:3: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row\_indexer,col\_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  This is separate from the ipykernel package so we can avoid doing imports until
+/usr/local/lib/python3.6/site-packages/ipykernel\_launcher.py:4: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row\_indexer,col\_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  after removing the cwd from sys.path.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}284}]:} \PY{n}{train}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spark\PYZus{}train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{test}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spark\PYZus{}test.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    Encoding here
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}285}]:} \PY{n}{sc} \PY{o}{=} \PY{n}{SparkContext}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{local}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spark} \PY{o}{=} \PY{n}{SparkSession}\PY{p}{(}\PY{n}{sc}\PY{p}{)}
+          
+          \PY{n}{spark\PYZus{}train} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{read}\PY{o}{.}\PY{n}{csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{spark\PYZus{}train.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{spark\PYZus{}test} \PY{o}{=} \PY{n}{spark}\PY{o}{.}\PY{n}{read}\PY{o}{.}\PY{n}{csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spark\PYZus{}test.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{spark\PYZus{}train} \PY{o}{=} \PY{n}{spark\PYZus{}train}\PY{o}{.}\PY{n}{withColumnRenamed}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}c0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spark\PYZus{}train} \PY{o}{=} \PY{n}{spark\PYZus{}train}\PY{o}{.}\PY{n}{withColumnRenamed}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}c1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spark\PYZus{}train} \PY{o}{=} \PY{n}{spark\PYZus{}train}\PY{o}{.}\PY{n}{withColumnRenamed}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}c2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spark\PYZus{}train} \PY{o}{=} \PY{n}{spark\PYZus{}train}\PY{o}{.}\PY{n}{withColumnRenamed}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}c3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spark\PYZus{}train} \PY{o}{=} \PY{n}{spark\PYZus{}train}\PY{o}{.}\PY{n}{withColumnRenamed}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}c4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spark\PYZus{}train} \PY{o}{=} \PY{n}{spark\PYZus{}train}\PY{o}{.}\PY{n}{withColumnRenamed}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}c5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spark\PYZus{}train} \PY{o}{=} \PY{n}{spark\PYZus{}train}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{user\PYZus{}index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{spark\PYZus{}train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{user\PYZus{}index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n}{spark\PYZus{}train} \PY{o}{=} \PY{n}{spark\PYZus{}train}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{business\PYZus{}index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{spark\PYZus{}train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{business\PYZus{}index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n}{spark\PYZus{}train} \PY{o}{=} \PY{n}{spark\PYZus{}train}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{spark\PYZus{}train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{spark\PYZus{}train}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++----------+--------------+------+-------------------+--------------------+--------------------+
+|user\_index|business\_index|rating|               date|             user\_id|         business\_id|
++----------+--------------+------+-------------------+--------------------+--------------------+
+|         0|             0|   4.0|2008-11-11 04:31:46|---1lKK3aKOuomHnw{\ldots}|5cbsjFtrntUAeUx51{\ldots}|
+|         0|             1|   4.0|2008-11-11 04:40:05|---1lKK3aKOuomHnw{\ldots}|--9e1ONYQuAa-CB\_R{\ldots}|
+|         0|             2|   5.0|2009-01-16 21:49:36|---1lKK3aKOuomHnw{\ldots}|ifEHr-ZnGFSKgJVsy{\ldots}|
+|         0|             3|   4.0|2010-10-16 23:27:02|---1lKK3aKOuomHnw{\ldots}|kosTPb88O4Q0XGbVb{\ldots}|
+|         0|             4|   5.0|2010-10-16 23:31:28|---1lKK3aKOuomHnw{\ldots}|rq5dgoksPHkJwJNQK{\ldots}|
+|         0|             5|   1.0|2010-10-17 04:19:01|---1lKK3aKOuomHnw{\ldots}|2BbFeotL85cIaBjSq{\ldots}|
+|         0|             6|   1.0|2010-11-05 20:08:08|---1lKK3aKOuomHnw{\ldots}|78TC3sZSYBzBsSJ0z{\ldots}|
+|         0|             7|   5.0|2010-11-05 21:49:42|---1lKK3aKOuomHnw{\ldots}|qtOt27b-3Re6zM5OS{\ldots}|
+|         0|             8|   5.0|2010-11-05 21:58:29|---1lKK3aKOuomHnw{\ldots}|CWNMLT-ppaUjLMmrn{\ldots}|
+|         0|             0|   1.0|2010-11-05 22:12:55|---1lKK3aKOuomHnw{\ldots}|5cbsjFtrntUAeUx51{\ldots}|
+|         0|             9|   4.0|2010-11-09 20:09:42|---1lKK3aKOuomHnw{\ldots}|DXlDzOcpdUE\_F21to{\ldots}|
+|         0|            10|   5.0|2010-11-09 20:11:47|---1lKK3aKOuomHnw{\ldots}|KskYqH1Bi7Z\_61pH6{\ldots}|
+|         0|            11|   1.0|2010-11-09 20:18:19|---1lKK3aKOuomHnw{\ldots}|eduRavkml8awmPach{\ldots}|
+|         0|            12|   5.0|2010-11-09 20:21:52|---1lKK3aKOuomHnw{\ldots}|-ErwgUmZ1-jHW\_rSu{\ldots}|
+|         0|            13|   5.0|2010-11-09 20:24:31|---1lKK3aKOuomHnw{\ldots}|ow5ku7hfMqU94mylT{\ldots}|
+|         0|            14|   3.0|2010-11-09 20:34:20|---1lKK3aKOuomHnw{\ldots}|vW65SNLam99SyOuVa{\ldots}|
+|         0|            15|   5.0|2010-11-16 03:11:16|---1lKK3aKOuomHnw{\ldots}|RRw9I8pHt5PzgYGT2{\ldots}|
+|         0|            16|   3.0|2010-11-16 03:15:16|---1lKK3aKOuomHnw{\ldots}|iPM85PQMs7QoAxw-O{\ldots}|
+|         0|             2|   2.0|2010-11-16 03:23:07|---1lKK3aKOuomHnw{\ldots}|ifEHr-ZnGFSKgJVsy{\ldots}|
+|         0|            17|   4.0|2010-11-16 03:27:20|---1lKK3aKOuomHnw{\ldots}|pwLQfEe\_yJYwAWWug{\ldots}|
++----------+--------------+------+-------------------+--------------------+--------------------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}286}]:} \PY{n}{spark\PYZus{}test} \PY{o}{=} \PY{n}{spark\PYZus{}test}\PY{o}{.}\PY{n}{withColumnRenamed}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}c0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spark\PYZus{}test} \PY{o}{=} \PY{n}{spark\PYZus{}test}\PY{o}{.}\PY{n}{withColumnRenamed}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}c1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spark\PYZus{}test} \PY{o}{=} \PY{n}{spark\PYZus{}test}\PY{o}{.}\PY{n}{withColumnRenamed}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}c2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spark\PYZus{}test} \PY{o}{=} \PY{n}{spark\PYZus{}test}\PY{o}{.}\PY{n}{withColumnRenamed}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}c3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spark\PYZus{}test} \PY{o}{=} \PY{n}{spark\PYZus{}test}\PY{o}{.}\PY{n}{withColumnRenamed}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}c4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spark\PYZus{}test} \PY{o}{=} \PY{n}{spark\PYZus{}test}\PY{o}{.}\PY{n}{withColumnRenamed}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}c5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spark\PYZus{}test} \PY{o}{=} \PY{n}{spark\PYZus{}test}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{user\PYZus{}index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{spark\PYZus{}test}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{user\PYZus{}index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n}{spark\PYZus{}test} \PY{o}{=} \PY{n}{spark\PYZus{}test}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{business\PYZus{}index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{spark\PYZus{}test}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{business\PYZus{}index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n}{spark\PYZus{}test} \PY{o}{=} \PY{n}{spark\PYZus{}test}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{spark\PYZus{}test}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{spark\PYZus{}test}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++----------+--------------+------+-------------------+--------------------+--------------------+
+|user\_index|business\_index|rating|               date|             user\_id|         business\_id|
++----------+--------------+------+-------------------+--------------------+--------------------+
+|         0|           121|   5.0|2018-10-11 23:29:57|---1lKK3aKOuomHnw{\ldots}|Hqs4YNST\_ZHbshwyi{\ldots}|
+|         1|         73463|   2.0|2014-04-21 16:58:28|--0kuuLmuYBe3Rmu0{\ldots}|PYe\_FDw6QTbTf66Wc{\ldots}|
+|         2|         29288|   5.0|2018-10-04 02:02:28|--2HUmLkcNHZp0xw6{\ldots}|KW9RNyBPmc77f9FsO{\ldots}|
+|         3|          3746|   3.0|2018-01-11 04:24:17|--2vR0DIsmQ6WfcSz{\ldots}|BLIJ-p5wYuAhw6Pp6{\ldots}|
+|         4|         15598|   4.0|2018-09-03 19:32:11|--3WaS23LcIXtxyFU{\ldots}|UKrfUw8quQiQM2N9i{\ldots}|
+|         5|         12851|   5.0|2018-05-15 19:54:15|--44NNdtngXMzsxyN{\ldots}|YNf4Yi9l7wa1U8k5K{\ldots}|
+|         6|          2272|   3.0|2012-06-17 16:59:06|--4q8EyqThydQm-eK{\ldots}|rcaPajgKOJC2vo\_l3{\ldots}|
+|         7|         22441|   1.0|2018-11-12 20:37:07|--4rAAfZnEIAKJE80{\ldots}|HTaA1mo9cB1dXMwfJ{\ldots}|
+|         8|         10397|   4.0|2018-05-24 21:19:54|--7gjElmOrthETJ8X{\ldots}|UxWH8zRYIBgs6Q2oy{\ldots}|
+|         9|          4345|   2.0|2016-08-24 14:55:34|--Br-QsbO9ad5GbZx{\ldots}|x6PA-2j7LpZAYFo2V{\ldots}|
+|        10|         21192|   3.0|2018-10-20 17:56:22|--BumyUHiO\_7YsHur{\ldots}|0L3CAgRf8wuH5MjNw{\ldots}|
+|        11|         17407|   5.0|2015-12-11 16:31:56|--CH8yRGXhO2MmbF-{\ldots}|TZpTyyGvQkKPnt59P{\ldots}|
+|        12|          5409|   2.0|2017-11-16 03:38:26|--CIuK7sUpaNzalLA{\ldots}|g-NKvwy8iLePEQHso{\ldots}|
+|        13|          2590|   5.0|2018-10-13 02:26:42|--DxiDMQgN08E5gTM{\ldots}|C8D\_GU9cDDjbOJfCa{\ldots}|
+|        14|          9878|   5.0|2014-12-19 23:10:38|--HCoE1ghaAlcaAfs{\ldots}|0ldxjei8v4q95fApI{\ldots}|
+|        15|        176270|   1.0|2018-03-26 07:55:42|--HOeLECewlqBqvFh{\ldots}|PssNPwuSuOjHAx5WG{\ldots}|
+|        16|         74684|   1.0|2018-07-18 00:30:19|--JqEn95hN31sznM1{\ldots}|12g\_z3nFKbN2telbz{\ldots}|
+|        17|            59|   4.0|2017-10-19 21:25:53|--LUapetRSkZpFZ2d{\ldots}|gHoP4eJimaMltfUlp{\ldots}|
+|        18|         33893|   5.0|2018-03-05 21:43:05|--NIc98RMssgy0mSZ{\ldots}|SoUlHQO5jZf2XFHr8{\ldots}|
+|        19|        113492|   1.0|2018-10-27 19:02:02|--Nnm\_506G\_p8MxAO{\ldots}|vp77iQDlV1OkbjNhm{\ldots}|
++----------+--------------+------+-------------------+--------------------+--------------------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}287}]:} \PY{n}{als\PYZus{}5} \PY{o}{=} \PY{n}{ALS}\PY{p}{(}\PY{n}{maxIter}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{rank} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{userCol}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{user\PYZus{}index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{itemCol}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{business\PYZus{}index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ratingCol}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                    \PY{n}{coldStartStrategy}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{drop}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{evaluator} \PY{o}{=} \PY{n}{RegressionEvaluator}\PY{p}{(}\PY{n}{metricName}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rmse}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{labelCol}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                          \PY{n}{predictionCol}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{prediction}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{model\PYZus{}5} \PY{o}{=} \PY{n}{als\PYZus{}5}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{spark\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}288}]:} \PY{n}{predictions\PYZus{}5} \PY{o}{=} \PY{n}{model\PYZus{}5}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{spark\PYZus{}test}\PY{p}{)}
+          \PY{n}{spark\PYZus{}prediction} \PY{o}{=} \PY{n}{predictions\PYZus{}5}\PY{o}{.}\PY{n}{toPandas}\PY{p}{(}\PY{p}{)}
+          \PY{n}{spark\PYZus{}prediction}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{stars}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}292}]:} \PY{n}{mae\PYZus{}score}\PY{p}{,}\PY{n}{mse\PYZus{}score}\PY{p}{,}\PY{n}{rank\PYZus{}accuracy\PYZus{}score} \PY{o}{=} \PY{n}{get\PYZus{}metrics}\PY{p}{(}\PY{n}{sum\PYZus{}dict}\PY{p}{,}\PY{n}{spark\PYZus{}prediction}\PY{p}{)}
+          \PY{n}{result}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MF(Baseline)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{mae\PYZus{}score}\PY{p}{,}\PY{n}{mse\PYZus{}score}\PY{p}{,}\PY{n}{rank\PYZus{}accuracy\PYZus{}score}\PY{p}{]}
+          \PY{n}{result}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}292}]:}               mae\_score  mse\_score  rank\_accuracy\_score
+          random\_guess   1.780044   4.904673             0.650275
+          MF(Baseline)   1.336100   3.154648             0.827526
+\end{Verbatim}
+            
+    \hypertarget{feature-engineer}{%
+\subsection{4 Feature Engineer}\label{feature-engineer}}
+
+In this section, we deal with part of the original features and convert
+them into union form. Feature engineering includes modification of
+following features:
+
+\begin{itemize}
+\tightlist
+\item
+  Average stars, useful, cool and funny of the user
+\item
+  Count of friends of the user
+\item
+  Embedded vector of business feature
+\item
+  Summation of review text vector
+\item
+  Categorical vector
+\item
+  Name vector
+\item
+  Feature vector of user
+\end{itemize}
+
+    \hypertarget{user-part}{%
+\subsubsection{4.1 user part}\label{user-part}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}163}]:} \PY{n}{train\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{index\PYZus{}col} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{test\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./test.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{index\PYZus{}col} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/numpy/lib/arraysetops.py:472: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  mask |= (ar1 == a)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}167}]:} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{test\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{test\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}168}]:} \PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}168}]:}                   user\_id             business\_id  \textbackslash{}
+          0  ---1lKK3aKOuomHnwAkAow  5cbsjFtrntUAeUx51FaFTg   
+          1  ---1lKK3aKOuomHnwAkAow  --9e1ONYQuAa-CB\_Rrw7Tw   
+          2  ---1lKK3aKOuomHnwAkAow  ifEHr-ZnGFSKgJVsywiAFg   
+          3  ---1lKK3aKOuomHnwAkAow  kosTPb88O4Q0XGbVbEOGCA   
+          4  ---1lKK3aKOuomHnwAkAow  rq5dgoksPHkJwJNQKlGQ7w   
+          
+                                                          text  
+          0  I like it, and so far I think it is one of the{\ldots}  
+          1  So when you go to a restaurant like this pleas{\ldots}  
+          2  The Wild Boar was amazing, so good my husband {\ldots}  
+          3  While its not Lotus it was tasty an the women {\ldots}  
+          4  Best coffee in town, they brew each cup. If yo{\ldots}  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{user\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./yelp\PYZus{}dataset/user.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{business\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./yelp\PYZus{}dataset/business.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/IPython/core/interactiveshell.py:2785: DtypeWarning: Columns (13) have mixed types. Specify dtype option on import or set low\_memory=False.
+  interactivity=interactivity, compiler=compiler, result=result)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{user\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{friends\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{user\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{friends}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{k}{if} \PY{n}{x} \PY{k}{else} \PY{l+m+mi}{0}\PY{p}{)}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fans}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{funny}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{useful}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+             \PY{n}{user\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{user\PYZus{}df}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{/} \PY{n}{user\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}169}]:} \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{user\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}cool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}fans}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}funny}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}useful}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{friends\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                                 \PY{n}{on} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{user\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}cool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}fans}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}funny}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}useful}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{friends\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                                 \PY{n}{on} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{business-part}{%
+\subsubsection{4.2 business part}\label{business-part}}
+
+\hypertarget{text}{%
+\paragraph{4.2.1 Text}\label{text}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}172}]:} \PY{n}{x\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}173}]:} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train\PYZus{}text\PYZus{}tfidf\PYZus{}1}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o+ow}{and} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train\PYZus{}text\PYZus{}tfidf\PYZus{}2}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o+ow}{and} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/train\PYZus{}text\PYZus{}tfidf\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{train\PYZus{}text\PYZus{}tfidf\PYZus{}1} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+              \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+              \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/train\PYZus{}text\PYZus{}tfidf\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{train\PYZus{}text\PYZus{}tfidf\PYZus{}2} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+              \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+              \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/test\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{test\PYZus{}text\PYZus{}tfidf} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+              \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+              \PY{n}{train\PYZus{}text\PYZus{}tfidf} \PY{o}{=} \PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{train\PYZus{}text\PYZus{}tfidf\PYZus{}1}\PY{p}{,}\PY{n}{train\PYZus{}text\PYZus{}tfidf\PYZus{}2}\PY{p}{)}\PY{p}{)}
+          \PY{k}{else}\PY{p}{:}
+              \PY{n}{tfidf\PYZus{}vec} \PY{o}{=} \PY{n}{TfidfVectorizer}\PY{p}{(}\PY{n}{stop\PYZus{}words}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{english}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{tfidf\PYZus{}vec}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+              \PY{n}{train\PYZus{}text\PYZus{}tfidf} \PY{o}{=} \PY{n}{tfidf\PYZus{}vec}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+              \PY{n}{test\PYZus{}text\PYZus{}tfidf} \PY{o}{=} \PY{n}{tfidf\PYZus{}vec}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{x\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{train\PYZus{}text\PYZus{}tfidf}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm\PYZus{}notebook}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+          \PY{n}{x\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{test\PYZus{}text\PYZus{}tfidf}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm\PYZus{}notebook}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}df}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=4252140), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=286130), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}174}]:} \PY{k}{del} \PY{n}{train\PYZus{}text\PYZus{}tfidf\PYZus{}1}\PY{p}{,}\PY{n}{train\PYZus{}text\PYZus{}tfidf\PYZus{}2}\PY{p}{,}\PY{n}{train\PYZus{}text\PYZus{}tfidf}\PY{p}{,}\PY{n}{test\PYZus{}text\PYZus{}tfidf}
+          \PY{k+kn}{import} \PY{n+nn}{gc}
+          \PY{n}{gc}\PY{o}{.}\PY{n}{collect}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}174}]:} 7
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}176}]:} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train\PYZus{}text\PYZus{}tfidf\PYZus{}1}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o+ow}{or} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train\PYZus{}text\PYZus{}tfidf\PYZus{}2}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/train\PYZus{}text\PYZus{}tfidf\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{train\PYZus{}text\PYZus{}tfidf}\PY{p}{[}\PY{p}{:}\PY{n}{train\PYZus{}text\PYZus{}tfidf}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{f}\PY{p}{)}
+              \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+              \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/train\PYZus{}text\PYZus{}tfidf\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{train\PYZus{}text\PYZus{}tfidf}\PY{p}{[}\PY{n}{train\PYZus{}text\PYZus{}tfidf}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{n}{f}\PY{p}{)}
+              \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+          \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/test\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{test\PYZus{}text\PYZus{}tfidf}\PY{p}{,}\PY{n}{f}\PY{p}{)}
+              \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}177}]:} \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+          \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{generating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{business\PYZus{}text\PYZus{}tfidf\PYZus{}df} \PY{o}{=} \PY{n}{x\PYZus{}train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{n}{business\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{business\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{business\PYZus{}text\PYZus{}tfidf\PYZus{}df}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{start}\PY{p}{)}
+              \PY{n}{business\PYZus{}text\PYZus{}tfidf} \PY{o}{=} \PY{n}{vstack}\PY{p}{(}\PY{n}{business\PYZus{}text\PYZus{}tfidf\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+              \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/business\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{train\PYZus{}text\PYZus{}tfidf}\PY{p}{,}\PY{n}{f}\PY{p}{)}
+              \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+          \PY{k}{else}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/business\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{business\PYZus{}text\PYZus{}tfidf} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+              \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+              \PY{n}{business\PYZus{}text\PYZus{}tfidf\PYZus{}df\PYZus{}temp} \PY{o}{=} \PY{n}{x\PYZus{}train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{n}{business\PYZus{}text\PYZus{}tfidf\PYZus{}df\PYZus{}temp} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{business\PYZus{}text\PYZus{}tfidf\PYZus{}df\PYZus{}temp}\PY{p}{,}\PY{n}{columns} \PY{o}{=}  \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+              \PY{n}{business\PYZus{}text\PYZus{}tfidf\PYZus{}df\PYZus{}temp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{business\PYZus{}text\PYZus{}tfidf}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm\PYZus{}notebook}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{business\PYZus{}text\PYZus{}tfidf\PYZus{}df\PYZus{}temp}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+              \PY{n}{business\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{business\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{business\PYZus{}text\PYZus{}tfidf\PYZus{}df\PYZus{}temp}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{start}\PY{p}{)}
+          \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{business\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{on} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{business\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{on} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+loading
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=183398), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+77.64045786857605
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}182}]:} \PY{k}{del} \PY{n}{business\PYZus{}text\PYZus{}tfidf}\PY{p}{,} \PY{n}{business\PYZus{}text\PYZus{}tfidf\PYZus{}df\PYZus{}temp}
+          \PY{n}{gc}\PY{o}{.}\PY{n}{collect}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}182}]:} 305
+\end{Verbatim}
+            
+    \hypertarget{categorical-and-name}{%
+\paragraph{4.2.2 Categorical and name}\label{categorical-and-name}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}183}]:} \PY{k}{def} \PY{n+nf}{clean\PYZus{}cate}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n+nb}{type}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{==} \PY{n+nb}{str}\PY{p}{:}
+                  \PY{n}{res} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n}{terms} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{terms}\PY{p}{:}
+                      \PY{n}{res}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{t}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} print(res)}
+                  \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{res}\PY{p}{)}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}184}]:} \PY{n}{business\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cleaned\PYZus{}categories}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{business\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categories}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x} \PY{p}{:} \PY{n}{clean\PYZus{}cate}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+          \PY{n}{cate\PYZus{}tfidf\PYZus{}vec} \PY{o}{=} \PY{n}{TfidfVectorizer}\PY{p}{(}\PY{p}{)}
+          \PY{n}{cate\PYZus{}tfidf} \PY{o}{=} \PY{n}{cate\PYZus{}tfidf\PYZus{}vec}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{business\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cleaned\PYZus{}categories}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{name\PYZus{}tfidf\PYZus{}vec} \PY{o}{=} \PY{n}{TfidfVectorizer}\PY{p}{(}\PY{p}{)}
+          \PY{n}{name\PYZus{}tfidf} \PY{o}{=} \PY{n}{name\PYZus{}tfidf\PYZus{}vec}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{business\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}sparse\PYZus{}vec}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{generating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{business\PYZus{}sparse\PYZus{}vec} \PY{o}{=} \PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{cate\PYZus{}tfidf}\PY{p}{,}\PY{n}{name\PYZus{}tfidf}\PY{p}{)}\PY{p}{)}
+              \PY{n}{business\PYZus{}sparse\PYZus{}vec}  \PY{o}{=} \PY{n}{business\PYZus{}sparse\PYZus{}vec}\PY{o}{.}\PY{n}{tocsr}\PY{p}{(}\PY{p}{)}
+              \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}sparse\PYZus{}vec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{business\PYZus{}sparse\PYZus{}vec}\PY{p}{,}\PY{n}{f}\PY{p}{)}
+              \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+          \PY{k}{else}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/business\PYZus{}sparse\PYZus{}vec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{business\PYZus{}sparse\PYZus{}vec} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+              \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+          \PY{n}{business\PYZus{}profile} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+          \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{business} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{tqdm\PYZus{}notebook}\PY{p}{(}\PY{n}{business\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n}{business\PYZus{}profile}\PY{p}{[}\PY{n}{business}\PY{p}{]} \PY{o}{=} \PY{n}{business\PYZus{}sparse\PYZus{}vec}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+          \PY{n}{business\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{business\PYZus{}profile}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+loading
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=192609), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}185}]:} \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{business\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{on} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{business\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{on} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}186}]:} \PY{k}{del} \PY{n}{business\PYZus{}sparse\PYZus{}vec}
+          \PY{n}{gc}\PY{o}{.}\PY{n}{collect}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}186}]:} 116
+\end{Verbatim}
+            
+    \hypertarget{factorization-machine}{%
+\subsection{5 Factorization Machine}\label{factorization-machine}}
+
+In this section, we utilize factorization machine as a method to include
+side information of user and business. We join the features and
+one-hotted index together to run the FM based on fastFM.
+
+The following cells may take a long time to run the first time to
+extract TF-iDF vector of text for each review and business. Also may
+cost amount of space to save the middle result so that accelerating
+second time running.
+
+    Making the sparse matrix for FM
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}189}]:} \PY{k}{def} \PY{n+nf}{build\PYZus{}sparse\PYZus{}matrix\PYZus{}fm}\PY{p}{(}\PY{n}{vec}\PY{p}{,}\PY{n}{x\PYZus{}df}\PY{p}{)}\PY{p}{:}
+              
+              \PY{c+c1}{\PYZsh{}\PYZsh{} build one\PYZhy{}hot id}
+              \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+              \PY{n}{x\PYZus{}sparse\PYZus{}id} \PY{o}{=} \PY{n}{vec}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{x\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}dict}\PY{p}{(}\PY{n}{orient} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{record}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)}
+              \PY{n}{x\PYZus{}sparse\PYZus{}user\PYZus{}stat} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{sparse}\PY{o}{.}\PY{n}{csr\PYZus{}matrix}\PY{p}{(}\PY{n}{x\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}cool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}fans}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}funny}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}useful}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{friends\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)}
+              \PY{n}{x\PYZus{}sparse\PYZus{}business\PYZus{}text} \PY{o}{=} \PY{n}{vstack}\PY{p}{(}\PY{n}{x\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)}
+              \PY{n}{x\PYZus{}sparse\PYZus{}business\PYZus{}profile} \PY{o}{=} \PY{n}{vstack}\PY{p}{(}\PY{n}{x\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)}
+              \PY{k}{assert} \PY{n}{x\PYZus{}sparse\PYZus{}id}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{n}{x\PYZus{}sparse\PYZus{}user\PYZus{}stat}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{assert} \PY{n}{x\PYZus{}sparse\PYZus{}business\PYZus{}text}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{n}{x\PYZus{}sparse\PYZus{}user\PYZus{}stat}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{assert} \PY{n}{x\PYZus{}sparse\PYZus{}user\PYZus{}stat}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{n}{x\PYZus{}sparse\PYZus{}business\PYZus{}profile}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              
+              \PY{n}{x\PYZus{}sparse} \PY{o}{=} \PY{n}{hstack}\PY{p}{(}\PY{p}{[}\PY{n}{x\PYZus{}sparse\PYZus{}id}\PY{p}{,}\PY{n}{x\PYZus{}sparse\PYZus{}user\PYZus{}stat}\PY{p}{,}\PY{n}{x\PYZus{}sparse\PYZus{}business\PYZus{}text}\PY{p}{,}\PY{n}{x\PYZus{}sparse\PYZus{}business\PYZus{}profile}\PY{p}{]}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{x\PYZus{}sparse}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+              \PY{k}{return} \PY{n}{x\PYZus{}sparse}
+          \PY{n}{vec} \PY{o}{=} \PY{n}{DictVectorizer}\PY{p}{(}\PY{p}{)}
+          \PY{n}{vec}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}dict}\PY{p}{(}\PY{n}{orient} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{record}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{x\PYZus{}train\PYZus{}fm} \PY{o}{=} \PY{n}{build\PYZus{}sparse\PYZus{}matrix\PYZus{}fm}\PY{p}{(}\PY{n}{vec}\PY{p}{,}\PY{n}{x\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
+          \PY{n}{x\PYZus{}test\PYZus{}fm} \PY{o}{=} \PY{n}{build\PYZus{}sparse\PYZus{}matrix\PYZus{}fm}\PY{p}{(}\PY{n}{vec}\PY{p}{,}\PY{n}{x\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}    
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.002684354782104492
+0.004668235778808594
+0.012681007385253906
+0.015171051025390625
+(100, 1093502)
+0.002542734146118164
+0.003988027572631836
+0.012691020965576172
+0.014397859573364258
+(100, 1093502)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}198}]:} \PY{c+c1}{\PYZsh{} vec = DictVectorizer()}
+          \PY{c+c1}{\PYZsh{} vec.fit(x\PYZus{}train[[\PYZsq{}user\PYZus{}id\PYZsq{},\PYZsq{}business\PYZus{}id\PYZsq{}]].to\PYZus{}dict(orient = \PYZsq{}record\PYZsq{}))}
+          \PY{k}{if} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x\PYZus{}train\PYZus{}fm.npz}\PY{l+s+s2}{\PYZdq{}} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{generating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{x\PYZus{}train\PYZus{}fm} \PY{o}{=} \PY{n}{build\PYZus{}sparse\PYZus{}matrix\PYZus{}fm}\PY{p}{(}\PY{n}{vec}\PY{p}{,}\PY{n}{x\PYZus{}train}\PY{p}{)}
+              \PY{n}{scipy}\PY{o}{.}\PY{n}{sparse}\PY{o}{.}\PY{n}{save\PYZus{}npz}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/x\PYZus{}train\PYZus{}fm.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x\PYZus{}train\PYZus{}fm}\PY{p}{)}
+          \PY{k}{else}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{x\PYZus{}train\PYZus{}fm} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{sparse}\PY{o}{.}\PY{n}{load\PYZus{}npz}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/x\PYZus{}train\PYZus{}fm.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{k}{if} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x\PYZus{}test\PYZus{}fm.npz}\PY{l+s+s2}{\PYZdq{}} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} 
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{generating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{x\PYZus{}test\PYZus{}fm} \PY{o}{=} \PY{n}{build\PYZus{}sparse\PYZus{}matrix\PYZus{}fm}\PY{p}{(}\PY{n}{vec}\PY{p}{,}\PY{n}{x\PYZus{}test}\PY{p}{)}
+              \PY{n}{scipy}\PY{o}{.}\PY{n}{sparse}\PY{o}{.}\PY{n}{save\PYZus{}npz}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/x\PYZus{}test\PYZus{}fm.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x\PYZus{}test\PYZus{}fm}\PY{p}{)}
+          \PY{k}{else}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loading}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{x\PYZus{}test\PYZus{}fm} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{sparse}\PY{o}{.}\PY{n}{load\PYZus{}npz}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pickle/x\PYZus{}test\PYZus{}fm.npz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+generating
+77.54142785072327
+79.19007897377014
+199.43242406845093
+261.8962299823761
+(4252140, 1093502)
+generating
+6.621103286743164
+6.77220606803894
+16.9272141456604
+21.169249057769775
+(286130, 1093502)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}199}]:} \PY{n}{x\PYZus{}train\PYZus{}fm} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{sparse}\PY{o}{.}\PY{n}{csr\PYZus{}matrix}\PY{p}{(}\PY{n}{x\PYZus{}train\PYZus{}fm}\PY{p}{)}
+          \PY{n}{x\PYZus{}test\PYZus{}fm} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{sparse}\PY{o}{.}\PY{n}{csr\PYZus{}matrix}\PY{p}{(}\PY{n}{x\PYZus{}test\PYZus{}fm}\PY{p}{)}
+\end{Verbatim}
+
+
+    Training\ldots{}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}203}]:} \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+          \PY{n}{fm} \PY{o}{=} \PY{n}{als}\PY{o}{.}\PY{n}{FMRegression}\PY{p}{(}\PY{n}{n\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{init\PYZus{}stdev}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{n}{rank} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{l2\PYZus{}reg\PYZus{}w} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{l2\PYZus{}reg\PYZus{}V} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
+          \PY{n}{fm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train\PYZus{}fm}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1172.6893401145935sec
+
+    \end{Verbatim}
+
+    inference and evaluate
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}293}]:} \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{fm}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}test\PYZus{}fm}\PY{p}{)}
+          \PY{n}{pred\PYZus{}df} \PY{o}{=} \PY{n}{test\PYZus{}df}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{pred\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{clip}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+          \PY{n}{mae\PYZus{}score}\PY{p}{,}\PY{n}{mse\PYZus{}score}\PY{p}{,}\PY{n}{rank\PYZus{}accuracy\PYZus{}score} \PY{o}{=} \PY{n}{get\PYZus{}metrics}\PY{p}{(}\PY{n}{sum\PYZus{}dict}\PY{p}{,}\PY{n}{pred\PYZus{}df}\PY{p}{)}
+          \PY{n}{result}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Factorization Machine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{mae\PYZus{}score}\PY{p}{,}\PY{n}{mse\PYZus{}score}\PY{p}{,}\PY{n}{rank\PYZus{}accuracy\PYZus{}score}\PY{p}{]}
+          \PY{n}{result}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}293}]:}                        mae\_score  mse\_score  rank\_accuracy\_score
+          random\_guess            1.780044   4.904673             0.650275
+          MF(Baseline)            1.336100   3.154648             0.827526
+          Factorization Machine   0.835237   1.603286             0.839589
+\end{Verbatim}
+            
+    As we can see, the FM is much better than baseline and extremely small
+on mae
+
+    \hypertarget{content-based-method}{%
+\subsection{6 Content-Based Method}\label{content-based-method}}
+
+In this section, we use content based method to rate the business, we
+extracted TF-iDF vector of business name and categorical in last section
+and we also extracted TF-iDF vector of each review text and we'll sum
+them together weighted by stars for each user, so that we can build the
+user profile.
+
+Finally, we build a regressor to map the user-bias score, business-bias
+score and the cosine similarity between user profile and business vector
+representation to the final score.
+
+All metrics mentioned in baseline section are used to evaluate the model
+performance
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}249}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}user\PYZus{}profile}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}  
+              \PY{n}{cate} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{sparse}\PY{o}{.}\PY{n}{csr\PYZus{}matrix}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{vstack}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{)}  
+              \PY{k}{return} \PY{n}{cate}
+          \PY{k}{def} \PY{n+nf}{get\PYZus{}cosine\PYZus{}similarity}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+              \PY{n}{a} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{toarray}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{p}{)}
+              \PY{n}{b} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}profile\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{toarray}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{p}{)}
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}247}]:} \PY{n}{xy\PYZus{}train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{x\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{]}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+          \PY{n}{user\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}profile\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{user\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{xy\PYZus{}train}\PY{p}{[}\PY{p}{[}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}                            
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}text\PYZus{}tfidf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}                        
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}
+          \PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{get\PYZus{}user\PYZus{}profile}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)}
+          
+          \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{user\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}profile\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{on} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{user\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}profile\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{on} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                                                                                                                                    
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+218.85624384880066
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}258}]:} \PY{n}{business\PYZus{}mean} \PY{o}{=} \PY{n}{xy\PYZus{}train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}264}]:} \PY{n}{x\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cosine\PYZus{}similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{x\PYZus{}train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}profile\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}
+              \PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{get\PYZus{}cosine\PYZus{}similarity}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{x\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{x\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{x\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{x\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{business\PYZus{}mean}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}267}]:} \PY{n}{x\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cosine\PYZus{}similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{x\PYZus{}test}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}profile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}profile\PYZus{}total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}
+              \PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{get\PYZus{}cosine\PYZus{}similarity}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{x\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{x\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{x\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{x\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{business\PYZus{}mean}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}273}]:} \PY{n}{x\PYZus{}train\PYZus{}cb} \PY{o}{=} \PY{n}{x\PYZus{}train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cosine\PYZus{}similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{x\PYZus{}test\PYZus{}cb} \PY{o}{=} \PY{n}{x\PYZus{}test}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}average\PYZus{}stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cosine\PYZus{}similarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{x\PYZus{}test\PYZus{}cb}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mf}{3.6}\PY{p}{,}\PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}274}]:} \PY{n}{lr} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+          \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train\PYZus{}cb}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}274}]:} LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=None,
+                   normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}294}]:} \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}test\PYZus{}cb}\PY{p}{)}
+          \PY{n}{pred\PYZus{}df} \PY{o}{=} \PY{n}{test\PYZus{}df}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{pred\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{clip}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+          \PY{n}{mae\PYZus{}score}\PY{p}{,}\PY{n}{mse\PYZus{}score}\PY{p}{,}\PY{n}{rank\PYZus{}accuracy\PYZus{}score} \PY{o}{=} \PY{n}{get\PYZus{}metrics}\PY{p}{(}\PY{n}{sum\PYZus{}dict}\PY{p}{,}\PY{n}{pred\PYZus{}df}\PY{p}{)}
+          \PY{n}{result}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Content\PYZhy{}Based Method}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{mae\PYZus{}score}\PY{p}{,}\PY{n}{mse\PYZus{}score}\PY{p}{,}\PY{n}{rank\PYZus{}accuracy\PYZus{}score}\PY{p}{]}
+          \PY{n}{result}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}294}]:}                        mae\_score  mse\_score  rank\_accuracy\_score
+          random\_guess            1.780044   4.904673             0.650275
+          MF(Baseline)            1.336100   3.154648             0.827526
+          Factorization Machine   0.835237   1.603286             0.839589
+          Content-Based Method    1.103736   1.777739             0.845142
+\end{Verbatim}
+            
+    Though the mae and mse score are worse the FM, Content base method
+achieve better on rank accuracy score
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
